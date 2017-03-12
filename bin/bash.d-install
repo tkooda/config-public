@@ -1,0 +1,28 @@
+#!/bin/bash
+
+## 2017-03-12 : tkooda : setup ~/.bash.d/*.sh
+
+
+REPO_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+
+#[ -d ~/.bash.d/ ] && { echo "ERROR: ~/.bash.d/ aready exists"; exit 1; }
+
+mkdir ~/.bash.d/ 2>/dev/null
+
+for subdir in \
+    host/0 \
+    host/`hostname` \
+    host/`hostname -a` \
+    user/0 \
+    user/${USER} ; do
+  
+  for f in ${REPO_ROOT}/${subdir}/bash/bash.d/*.sh ; do
+    [ -f "$f" ] || continue
+    ln -sfv ${f} ~/.bash.d/
+  done
+  
+done
+
+grep -q '^source .*/config-public/bin/bash.d-source' ~/.bashrc \
+    || { echo -e "\nsource ${REPO_ROOT}/bin/bash.d-source\n" >> ~/.bashrc;
+	 echo "added 'source ${REPO_ROOT}/bin/bash.d-source' to ~/.bashrc"; }

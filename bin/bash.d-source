@@ -1,0 +1,5 @@
+#!/bin/bash
+for f in ~/.bash.d/*.sh ; do
+  [ -f "$f" ] || continue
+  source "$f"
+done
