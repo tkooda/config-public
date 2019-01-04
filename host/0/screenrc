@@ -1,0 +1,32 @@
+# ~/.screenrc
+
+startup_message off
+## tkooda : 2013-02-14 : 
+##bind ^m screen mutt
+bind ^m screen -t 'Mutt' mutt
+
+defscrollback 40960 # scrollback buffer size
+defobuflimit 40960  # paste buffer limit
+deflogin off       # no utmp entrys
+defmonitor off
+activity ""        # avoid false notifications, but listen for msgs
+## tkooda : 2007-08-17 : silence bell msg to avoid blocking current window
+bell_msg ""
+
+#remove some stupid / dangerous key bindings
+bind k
+bind ^k
+bind .
+bind ^\
+bind \\
+#bind ^h # already used for hx
+bind h # no hardcopy?
+#make them better
+bind 'K' kill
+bind 'I' login on
+bind 'O' login off
+bind '}' history
+
+## tkooda : 2012-04-11 : enable mousewheel in CTRL-a + [ , or CTRL-a + ESC 
+termcapinfo xterm* ti@:te@
+
