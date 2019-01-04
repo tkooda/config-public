@@ -22,8 +22,7 @@ for basedir in \
       
       for d in ${basedir}/${repo}/${subdir}/bin ; do
         [ -d "$d" ] || continue
-echo $d
-#        export PATH="${d}:${PATH}"
+        export PATH="${d}:${PATH}"
       done
     
     done
