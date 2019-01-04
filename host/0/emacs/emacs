@@ -246,3 +246,9 @@
 
 (add-hook 'after-save-hook 'autocompile)
 
+
+;; 2017-04-10 : tkooda : disable "Symbolic link to Git-controlled source file; follow link? (y or n)"
+(setq vc-follow-symlinks 't)
+;;(setq vc-follow-symlinks 'nil)
+
+
