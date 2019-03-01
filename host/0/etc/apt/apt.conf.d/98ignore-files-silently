@@ -1,0 +1,2 @@
+Dir::Ignore-Files-Silently:: "\.bak\.";
+Dir::Ignore-Files-Silently:: "\.orig\.";

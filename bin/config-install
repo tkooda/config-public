@@ -14,12 +14,30 @@ for subdir in \
     host/0 ; do
   
   ## install any systemwide inputrc..
-  if [ ! -h /etc/inputrc ]; then
-    p="${REPO_ROOT}/${subdir}/etc/inputrc"
+  f="/etc/inputrc"
+  if [ ! -h "${f}" ]; then
+    p="${REPO_ROOT}/${subdir}${f}"
     [ -f "${p}" ] \
-      && mv /etc/inputrc /etc/inputrc.orig.`date -I` \
-      && ln -sv "${p}" /etc/
+      && mv ${f}{,.orig.`date -I`} \
+      && ln -sv "${p}" "${f%/*}/"
   fi
+  
+  ## install any systemwide apt unattended-upgrades config..
+  f="/etc/apt/apt.conf.d/50unattended-upgrades"
+  if [ ! -e "${f}" -o "`grep -v '^//' "${f}" 2>/dev/null |grep .. |openssl sha1 |cut -d ' ' -f2`" == "e3fba42d75cbd86736e468a98cb7e1e861ba67b5" ]; then # if stock Ubuntu 18.04 config..
+    p="${REPO_ROOT}/${subdir}${f}"
+    [ -f "${p}" ] \
+      && { mv ${f}{,.orig.`date -I`}; ln -sv "${p}" "${f%/*}/"; }
+  fi
+  
+  ## install any systemwide apt config..
+  f="/etc/apt/apt.conf.d/98ignore-files-silently"
+  if [ ! -e "${f}" ]; then
+    p="${REPO_ROOT}/${subdir}${f}"
+    [ -f "${p}" ] \
+      && ln -sv "${p}" "${f%/*}/"
+  fi
+  
   
   ## install any local emacsrc..
   if [ ! -e ~/.emacs ]; then
