@@ -1,0 +1,36 @@
+#!/bin/bash
+
+## 2019-03-01 : tkooda : setup generic machine config files
+
+REPO_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && cd .. && pwd )"
+
+
+## attempt to install in order of precedence..
+for subdir in \
+    user/${USER} \
+    user/0 \
+    host/`hostname -a` \
+    host/`hostname` \
+    host/0 ; do
+  
+  ## install any systemwide inputrc..
+  if [ ! -h /etc/inputrc ]; then
+    p="${REPO_ROOT}/${subdir}/etc/inputrc"
+    [ -f "${p}" ] \
+      && mv /etc/inputrc /etc/inputrc.orig.`date -I` \
+      && ln -sv "${p}" /etc/
+  fi
+  
+  ## install any local emacsrc..
+  if [ ! -e ~/.emacs ]; then
+    p="${REPO_ROOT}/${subdir}/emacs/emacs"
+    ln -sv "${p}" ~/.emacs
+  fi
+  
+  ## install any local screenrc..
+  if [ ! -e ~/.screenrc ]; then
+    p="${REPO_ROOT}/${subdir}/screenrc"
+    ln -sv "${p}" ~/.screenrc
+  fi
+  
+done
