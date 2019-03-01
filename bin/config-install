@@ -24,13 +24,15 @@ for subdir in \
   ## install any local emacsrc..
   if [ ! -e ~/.emacs ]; then
     p="${REPO_ROOT}/${subdir}/emacs/emacs"
-    ln -sv "${p}" ~/.emacs
+    [ -f "$p" ] \
+      && ln -sv "${p}" ~/.emacs
   fi
   
   ## install any local screenrc..
   if [ ! -e ~/.screenrc ]; then
     p="${REPO_ROOT}/${subdir}/screenrc"
-    ln -sv "${p}" ~/.screenrc
+    [ -f "$p" ] \
+      && ln -sv "${p}" ~/.screenrc
   fi
   
 done
