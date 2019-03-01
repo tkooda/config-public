@@ -27,16 +27,17 @@ for subdir in \
   if [ ! -e "${f}" -o "`grep -v '^//' "${f}" 2>/dev/null |grep .. |openssl sha1 |cut -d ' ' -f2`" == "e3fba42d75cbd86736e468a98cb7e1e861ba67b5" ]; then # if stock Ubuntu 18.04 config..
     p="${REPO_ROOT}/${subdir}${f}"
     [ -f "${p}" ] \
-      && { mv ${f}{,.orig.`date -I`}; ln -sv "${p}" "${f%/*}/"; }
+      && { mv ${f}{,.orig.`date -I`.bak}; ln -sv "${p}" "${f%/*}/"; }
   fi
   
-  ## install any systemwide apt config..
-  f="/etc/apt/apt.conf.d/98ignore-files-silently"
-  if [ ! -e "${f}" ]; then
-    p="${REPO_ROOT}/${subdir}${f}"
-    [ -f "${p}" ] \
-      && ln -sv "${p}" "${f%/*}/"
-  fi
+## 2019-03-01 : tkooda : doesn't actually work like the apt.conf docs say..
+#  ## install any systemwide apt config..
+#  f="/etc/apt/apt.conf.d/98ignore-files-silently"
+#  if [ ! -e "${f}" ]; then
+#    p="${REPO_ROOT}/${subdir}${f}"
+#    [ -f "${p}" ] \
+#      && ln -sv "${p}" "${f%/*}/"
+#  fi
   
   
   ## install any local emacsrc..
