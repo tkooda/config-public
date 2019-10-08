@@ -15,7 +15,7 @@
 (display-time)
 
 ;set default mode for new files of unknown types to text
-(setq default-major-mode 'text-mode)
+(setq major-mode 'text-mode)
 
 ;love the line numbers
 (setq line-number-mode t)
@@ -162,7 +162,7 @@
 ;;;;Make sure that .emacs file is edited in lisp mode:
 (setq auto-mode-alist (cons '("\.emacs" . lisp-mode) auto-mode-alist))
 
-(setq default-tab-width 4)
+(setq tab-width 4)
 
 
 ;; Fix the worse part about emacs: indentation craziness
@@ -257,4 +257,17 @@
 ;; 2017-04-10 : tkooda : disable "Symbolic link to Git-controlled source file; follow link? (y or n)"
 ;;(setq vc-follow-symlinks 't)
 (setq vc-follow-symlinks 'nil)
+
+;; 2019-09-16 : tkooda : https://stackoverflow.com/questions/6679625/how-to-make-emacs-python-mode-generate-tabs-for-indent
+(add-hook 'python-mode-hook
+  (lambda ()
+    (setq indent-tabs-mode t)
+    (setq python-indent 4)
+    (setq tab-width 4)))
+
+;; 2019-09-17 : tkooda : https://web-mode.org for editing JavaScript within HTML
+(add-to-list 'load-path "~/.emacs.d/lisp/")
+(load "web-mode")
+(add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
 
