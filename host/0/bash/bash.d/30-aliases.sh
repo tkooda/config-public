@@ -44,8 +44,10 @@ function mkdcd { x="`date -I`.${1// /_}"; mkdir "${x}" && cd "${x}" && pwd; }
 function urlencode { python -c "import urllib; print urllib.quote('''$1''',safe='')"; }
 
 
-## 2017-04-17 : tkooda : transfer.sh (public)
-transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\necho transfer /tmp/test.md\ncat /tmp/test.md | transfer test.md"; return 1; fi; tmpfile=$( mktemp -t transferXXX ); if tty -s; then basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile" >> $tmpfile; else curl --progress-bar --upload-file "-" "https://transfer.sh/$1" >> $tmpfile ; fi; cat $tmpfile; echo; rm -f $tmpfile; }
+## 2017-04-17 : tkooda : transfer.sh (public) : upload file to public server to get URL to send someone
+transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\n  transfer /tmp/test.txt"; return 1; else basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile"; fi; }
+
 
 ## 2018-08-19 : tkooda : generate a decent human-readable random password
 alias decentpassword='r=$(cat /dev/urandom |tr -dc abcdefghknopqrstuvwxyzCDEY379 |head -c12); echo ${r:0:4}-${r:4:4}-${r:8:4}'
+
