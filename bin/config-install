@@ -40,11 +40,11 @@ for subdir in \
 #  fi
   
   
-  ## install any local emacsrc..
-  if [ ! -e ~/.emacs ]; then
-    p="${REPO_ROOT}/${subdir}/emacs/emacs"
-    [ -f "$p" ] \
-      && ln -sv "${p}" ~/.emacs
+  ## install any local ~/emacs.d..
+  if [ ! -e ~/.emacs.d ]; then
+    p="${REPO_ROOT}/${subdir}/emacs/emacs.d"
+    [ -d "$p" ] \
+      && ln -sv "${p}" ~/.emacs.d
   fi
   
   ## install any local screenrc..

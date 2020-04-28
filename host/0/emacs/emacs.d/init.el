@@ -255,8 +255,8 @@
 
 
 ;; 2017-04-10 : tkooda : disable "Symbolic link to Git-controlled source file; follow link? (y or n)"
-;;(setq vc-follow-symlinks 't)
-(setq vc-follow-symlinks 'nil)
+;;(setq vc-follow-symlinks 'nil)
+(setq vc-follow-symlinks 't)
 
 ;; 2019-09-16 : tkooda : https://stackoverflow.com/questions/6679625/how-to-make-emacs-python-mode-generate-tabs-for-indent
 (add-hook 'python-mode-hook
