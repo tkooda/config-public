@@ -1,3 +1,5 @@
+;; from: https://github.com/jcsalomon/smarttabs/raw/master/smart-tabs-mode.el
+
 ;;; smart-tabs-mode.el --- Intelligently indent with tabs, align with spaces!
 
 ;; Copyright © 2011 John Croisant <jacius@gmail.com>
@@ -13,7 +15,7 @@
 ;; Maintainer: Joel C. Salomon <joelcsalomon@gmail.com>
 ;; URL: http://www.emacswiki.org/emacs/SmartTabs
 ;; Created: 19 Sep 2011
-;; Version: 1.0
+;; Version: 1.1
 ;; Keywords: languages
 
 ;; This file is not part of GNU Emacs.
@@ -246,14 +248,13 @@ Smarttabs is enabled in mode hook.")
   `(progn
      (defadvice ,function (around smart-tabs activate)
        (cond
-        (smart-tabs-mode
+        ((and smart-tabs-mode indent-tabs-mode (eq ,offset tab-width))
          (save-excursion
            (beginning-of-line)
            (while (looking-at "\t*\\( +\\)\t+")
              (replace-match "" nil nil nil 1)))
          (setq tab-width tab-width)
-         (let ((indent-tabs-mode t)
-               (tab-width fill-column)
+         (let ((tab-width fill-column)
                (,offset fill-column))
            (unwind-protect
                (progn ad-do-it))))
