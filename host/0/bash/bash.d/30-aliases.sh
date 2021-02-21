@@ -43,6 +43,8 @@ function mkdcd { x="`date -I`.${1// /_}"; mkdir "${x}" && cd "${x}" && pwd; }
 
 function urlencode { python -c "import urllib; print urllib.quote('''$1''',safe='')"; }
 
+function cdf() { cd "${1%/*}"; pwd; } # cd to parent of file
+
 
 ## 2017-04-17 : tkooda : transfer.sh (public) : upload file to public server to get URL to send someone
 transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\n  transfer /tmp/test.txt"; return 1; else basefile=$(basename "$1" | sed -e 's/[^a-zA-Z0-9._-]/-/g'); curl --progress-bar --upload-file "$1" "https://transfer.sh/$basefile"; fi; }
