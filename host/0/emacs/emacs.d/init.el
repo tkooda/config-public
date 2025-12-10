@@ -284,4 +284,12 @@
 
 
 
+;; 2023-02-06 : tkooda : workaround "Wrong type argument: char-or-string-p" error when pasting (unicode?) characters, like dashes or left/right-quotes?:  https://discourse.julialang.org/t/terminal-emacs-woes-paste-julia-output-gives-char-or-string-p-error-u2502-displays-etc/8981/6
+(setq locale-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(set-selection-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+(define-coding-system-alias 'UTF-8 'utf-8)
+
 
