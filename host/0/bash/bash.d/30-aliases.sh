@@ -43,7 +43,7 @@ function mkdcd { x="`date -I`.${1// /_}"; mkdir "${x}" && cd "${x}" && pwd; }
 
 function urlencode { python -c "import urllib; print urllib.quote('''$1''',safe='')"; }
 
-function cdf() { cd "${1%/*}"; pwd; } # cd to parent of file
+function cdf() { local rpf=$( readlink -f "$1" ); local rpd=$( dirname "$rpf" ); cd "$rpd"; pwd; } # cd to parent of file
 
 
 ## 2017-04-17 : tkooda : transfer.sh (public) : upload file to public server to get URL to send someone
