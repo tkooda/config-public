@@ -53,3 +53,6 @@ transfer() { if [ $# -eq 0 ]; then echo -e "No arguments specified. Usage:\n  tr
 ## 2018-08-19 : tkooda : generate a decent human-readable random password
 alias decentpassword='r=$(cat /dev/urandom |tr -dc abcdefghknopqrstuvwxyzCDEY379 |head -c12); echo ${r:0:4}-${r:4:4}-${r:8:4}'
 
+
+alias printable="tr -cd '[:print:]\n\t'"
+
