@@ -292,4 +292,7 @@
 (prefer-coding-system 'utf-8)
 (define-coding-system-alias 'UTF-8 'utf-8)
 
+;; 2026-06-15 : tkooda : add 2-spaces for tabs in yaml files
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
 
