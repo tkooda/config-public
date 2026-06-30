@@ -30,3 +30,5 @@ bind '}' history
 ## tkooda : 2012-04-11 : enable mousewheel in CTRL-a + [ , or CTRL-a + ESC 
 termcapinfo xterm* ti@:te@
 
+## 2026-06-30 : tkooda : Tell screen to ignore empty trailing margins when copying/pasting text buffers
+bce off
