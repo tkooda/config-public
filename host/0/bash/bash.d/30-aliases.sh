@@ -56,3 +56,15 @@ alias decentpassword='r=$(cat /dev/urandom |tr -dc abcdefghknopqrstuvwxyzCDEY379
 
 alias printable="tr -cd '[:print:]\n\t'"
 
+## 2026-07-26 : tkooda : tmux function, named per $CWD
+tm() {
+  local name="${1:-${PWD##*/}}"
+  name="${name//[.:]/_}"          # tmux target syntax reserves . and :
+  [ -z "$name" ] && name="root"   # PWD=/ has an empty basename
+
+  if [ -n "$TMUX" ]; then         # already inside tmux: switch, don't nest
+    tmux new-session -A -d -s "$name" && tmux switch-client -t "$name"
+  else
+    tmux new-session -A -D -s "$name"
+  fi
+}
