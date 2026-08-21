@@ -68,3 +68,6 @@ tm() {
     tmux new-session -A -D -s "$name"
   fi
 }
+
+## 2026-08-20 : tkooda : get ISP info for an IP
+getisp() { curl -s "https://ipinfo.io/${1}/json" | jq -r '.org'; }
