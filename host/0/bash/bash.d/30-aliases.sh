@@ -70,4 +70,4 @@ tm() {
 }
 
 ## 2026-08-20 : tkooda : get ISP info for an IP
-getisp() { curl -s "https://ipinfo.io/${1}/json" | jq -r '.org'; }
+getisp() { curl -s "https://ipinfo.io/${1}/json" | grep '"org":' | cut -d '"' -f 4; }
