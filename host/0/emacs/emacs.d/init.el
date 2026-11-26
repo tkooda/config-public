@@ -296,3 +296,7 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.ya?ml\\'" . yaml-mode))
 
+;; 2026-11-25 : tkooda : stop errant CTRL-q chars from quitting emacs
+(unless (display-graphic-p)
+  (set-quit-char ?\C-^))
+
